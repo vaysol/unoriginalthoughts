@@ -92,3 +92,27 @@ define('EVENT_PRIORITY_NORMAL', 100);
  * @deprecated Use \CodeIgniter\Events\Events::PRIORITY_HIGH instead.
  */
 define('EVENT_PRIORITY_HIGH', 10);
+
+$base = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']) : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']);
+
+defined('BASE') || define('BASE', $base);
+
+if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== FALSE):
+    $cspvalue = true;
+ elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') !== FALSE): //For Supporting IE 11
+    $cspvalue = true;
+ elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox') !== FALSE):
+    $cspvalue = false;
+ elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== FALSE):
+    $cspvalue = true;
+ elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera Mini') !== FALSE):
+    $cspvalue = true;
+ elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera') !== FALSE):
+    $cspvalue = true;
+ elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') !== FALSE):
+    $cspvalue = false;
+ else:
+    $cspvalue = true;
+ endif;
+
+ define('CSPVAL', $cspvalue);

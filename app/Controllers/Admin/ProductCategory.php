@@ -55,6 +55,30 @@ class ProductCategory extends Controller
         echo view('Admin/footer');
     }
 
+    public function delete($id)
+    {
+        if (session()->get('id'))
+        {
+            $query = $this->product_category_model->delete_product_category($id);
+            if ($query) 
+            {
+                $msg = array('type' => 'success', 'icon' => 'icon-ok green', 'txt' => 'Deleted Successfully');
+                session()->setFlashdata('msg', $msg);
+            } 
+            else 
+            {
+                $msg = array('type' => 'error', 'icon' => 'icon-remove red', 'txt' => 'Sorry! Unable Delete.');
+                session()->setFlashdata('msg', $msg);
+            }
+
+            return redirect()->to(base_url('/admin/product-categories'));
+        } 
+        else 
+        {
+            return redirect()->to(base_url('/admin/login'));
+        }
+    }
+
     function save() 
     {
         if ($this->request->getMethod() == 'post') 

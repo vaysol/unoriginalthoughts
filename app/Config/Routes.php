@@ -55,6 +55,12 @@ $routes->get('/admin/product-categories/edit/(:any)', 'Admin\ProductCategory::ed
 $routes->post('/admin/product-categories/save', 'Admin\ProductCategory::save');
 $routes->get('/admin/product-categories/delete/(:any)', 'Admin\ProductCategory::delete/$1');
 
+//Product Category
+$routes->get('/admin/portfolios', 'Admin\Portfolio::index');
+$routes->get('/admin/portfolio/add', 'Admin\Portfolio::add');
+$routes->get('/admin/portfolio/edit/(:any)', 'Admin\Portfolio::edit/$1');
+$routes->post('/admin/portfolio/save', 'Admin\Portfolio::save');
+$routes->get('/admin/portfolio/delete/(:any)', 'Admin\Portfolio::delete/$1');
 
 /*  Admin panel routes ends */
 

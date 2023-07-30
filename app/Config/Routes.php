@@ -31,9 +31,14 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('/about', 'Home::about');
-$routes->get('/services', 'Home::services');
-$routes->get('/team', 'Home::team');
-$routes->get('/contact-us', 'Home::contact_us');
+$routes->get('/portfolio', 'Home::portfolio');
+$routes->get('/products', 'Home::products');
+$routes->get('/products-view', 'Home::product_inner');
+$routes->get('/contact', 'Home::contact');
+$routes->get('/faqs', 'Home::faqs');
+$routes->get('/privacy-policy', 'Home::privacy_policy');
+$routes->get('/shipping-policy', 'Home::shipping_policy');
+$routes->get('/return-and-refund-policy', 'Home::return_policy');
 
 
 

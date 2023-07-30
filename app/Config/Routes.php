@@ -62,6 +62,8 @@ $routes->get('/admin/portfolio/edit/(:any)', 'Admin\Portfolio::edit/$1');
 $routes->post('/admin/portfolio/save', 'Admin\Portfolio::save');
 $routes->get('/admin/portfolio/delete/(:any)', 'Admin\Portfolio::delete/$1');
 
+// Enquiry
+$routes->get('/admin/enquiry', 'Admin\Enquiry::index');
 /*  Admin panel routes ends */
 
 $routes->get('/', 'Home::index');

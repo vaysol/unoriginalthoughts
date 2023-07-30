@@ -64,6 +64,13 @@ $routes->get('/admin/portfolio/delete/(:any)', 'Admin\Portfolio::delete/$1');
 
 // Enquiry
 $routes->get('/admin/enquiry', 'Admin\Enquiry::index');
+
+//Product Category
+$routes->get('/admin/products', 'Admin\Products::index');
+$routes->get('/admin/product/add', 'Admin\Products::add');
+$routes->get('/admin/product/edit/(:any)', 'Admin\Products::edit/$1');
+$routes->post('/admin/product/save', 'Admin\Products::save');
+$routes->get('/admin/product/delete/(:any)', 'Admin\Products::delete/$1');
 /*  Admin panel routes ends */
 
 $routes->get('/', 'Home::index');

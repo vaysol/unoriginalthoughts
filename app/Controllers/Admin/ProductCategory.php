@@ -2,20 +2,19 @@
 
 namespace App\Controllers\Admin;
 
-use App\Models\Admin\Banners_Model;
 use CodeIgniter\Controller;
+use App\Models\Admin\ProductCategory_Model;
 
-class Banners extends Controller
 
+class ProductCategory extends Controller
 {
-    
-    public $session , $banners_model;
+    public $session , $product_category_model;
 
     function __construct()
     {
         helper('custom');
         $this->session = \Config\Services::session();
-        $this->banners_model = new Banners_Model();
+        $this->product_category_model = new ProductCategory_Model();
     }
 
     public function index()
@@ -25,14 +24,12 @@ class Banners extends Controller
             return redirect()->to(base_url('/admin/login'));
         }
 
-        $data['banners'] =  $this->banners_model->get_all_banners();
+        $data['product_categories'] =  $this->product_category_model->get_all_product_categories();
 
         echo view('Admin/header');
-        echo view('Admin/Banners/index',$data);
+        echo view('Admin/ProductCategories/index',$data);
         echo view('Admin/footer');
-       
     }
-
 
     public function add()
     {
@@ -41,32 +38,28 @@ class Banners extends Controller
         }
 
         echo view('Admin/header');
-        echo view('Admin/Banners/form');
+        echo view('Admin/ProductCategories/form');
         echo view('Admin/footer');
-
     }
-
+    
     public function edit($id)
     {
         if (empty($this->session->get('id'))) {
             return redirect()->to(base_url('/admin/login'));
         }
         
-        $data['banner'] = $this->banners_model->get_banner_by_id($id);
+        $data['product_category'] = $this->product_category_model->get_product_category_by_id($id);
 
         echo view('Admin/header');
-        echo view('Admin/Banners/form',$data);
+        echo view('Admin/ProductCategories/form',$data);
         echo view('Admin/footer');
-
     }
-
 
     public function delete($id)
     {
-
         if (session()->get('id'))
         {
-            $query = $this->banners_model->delete_banner($id);
+            $query = $this->product_category_model->delete_product_category($id);
             if ($query) 
             {
                 $msg = array('type' => 'success', 'icon' => 'icon-ok green', 'txt' => 'Deleted Successfully');
@@ -78,7 +71,7 @@ class Banners extends Controller
                 session()->setFlashdata('msg', $msg);
             }
 
-            return redirect()->to(base_url('/admin/banners'));
+            return redirect()->to(base_url('/admin/product-categories'));
         } 
         else 
         {
@@ -86,9 +79,9 @@ class Banners extends Controller
         }
     }
 
-    public function save()
+    function save() 
     {
-            if ($this->request->getMethod() == 'post') 
+        if ($this->request->getMethod() == 'post') 
             {
 
                 if (empty($this->session->get('id'))) 
@@ -101,15 +94,15 @@ class Banners extends Controller
                     $image = $this->request->getFile('desktop_image');
                     $imageNameTrip = strrpos($_FILES['desktop_image']['name'], ".");
                     $imageName = substr($_FILES['desktop_image']['name'], 0, $imageNameTrip);
-                    $destnpath = 'dynamic_images/banner-images/'.$imageName;
+                    $destnpath = 'dynamic_images/product-categories-images/'.$imageName;
                     if($_FILES['desktop_image']['name'])
                     {
                         webp_image_with_transperent($destnpath,$image );
                     }
-                    $this->banners_model->data['desktop_image'] = $imageName != NULL ? $destnpath : '';
-                    if (!$this->banners_model->data['desktop_image']) 
+                    $this->product_category_model->data['desktop_image'] = $imageName != NULL ? $destnpath : '';
+                    if (!$this->product_category_model->data['desktop_image']) 
                     {
-                        unset($this->banners_model->data['desktop_image']);
+                        unset($this->product_category_model->data['desktop_image']);
                     }
                 }
 
@@ -117,37 +110,36 @@ class Banners extends Controller
                     $image = $this->request->getFile('mobile_image');
                     $imageNameTrip = strrpos($_FILES['mobile_image']['name'], ".");
                     $imageName = substr($_FILES['mobile_image']['name'], 0, $imageNameTrip);
-                    $destnpath = 'dynamic_images/banner-images/'.$imageName;
+                    $destnpath = 'dynamic_images/product-categories-images/'.$imageName;
                     if($_FILES['mobile_image']['name'])
                     {
                         webp_image_with_transperent($destnpath,$image );
                     }
-                    $this->banners_model->data['mobile_image'] = $imageName != NULL ? $destnpath : '';
-                    if (!$this->banners_model->data['mobile_image']) 
+                    $this->product_category_model->data['mobile_image'] = $imageName != NULL ? $destnpath : '';
+                    if (!$this->product_category_model->data['mobile_image']) 
                     {
-                        unset($this->banners_model->data['mobile_image']);
+                        unset($this->product_category_model->data['mobile_image']);
                     }
                 }
 
-                $this->banners_model->data['title'] = $this->request->getVar('title');
-                $this->banners_model->data['priority'] = $this->request->getVar('priority');
-                $this->banners_model->data['alt_text'] = $this->request->getVar('alt_text');
-                $this->banners_model->data['title_text'] = $this->request->getVar('title_text');
-                $this->banners_model->data['button_link'] = $this->request->getVar('button_link');
-                $this->banners_model->data['status'] = $this->request->getVar('status');
+                $this->product_category_model->data['title'] = $this->request->getVar('title');
+                $this->product_category_model->data['priority'] = $this->request->getVar('priority');
+                $this->product_category_model->data['alt_text'] = $this->request->getVar('alt_text');
+                $this->product_category_model->data['title_text'] = $this->request->getVar('title_text');
+                $this->product_category_model->data['status'] = $this->request->getVar('status');
 
                  //Add
             if (empty($this->request->getPost('id'))) 
             {
                 
-                $this->banners_model->data['create_date'] = date('Y-m-d H:i:s');
-                $this->banners_model->data['created_by'] = session()->get('id');
-                $this->banners_model->data['modified_date'] = date('Y-m-d H:i:s');
-                $this->banners_model->data['modified_by'] = session()->get('id');
+                $this->product_category_model->data['create_date'] = date('Y-m-d H:i:s');
+                $this->product_category_model->data['created_by'] = session()->get('id');
+                $this->product_category_model->data['modified_date'] = date('Y-m-d H:i:s');
+                $this->product_category_model->data['modified_by'] = session()->get('id');
 
-                $isInsert = $this->banners_model->insert_banner();
+                $isInsert = $this->product_category_model->insert_product_category();
                 if ($isInsert) {
-                    $msg = array('type' => 'success', 'icon' => 'icon-ok green', 'txt' => 'Banner Added Successfully');
+                    $msg = array('type' => 'success', 'icon' => 'icon-ok green', 'txt' => 'Product Category Added Successfully');
                     session()->setFlashdata('msg', $msg);
                 } else {
                     $msg = array('type' => 'error', 'icon' => 'icon-remove red', 'txt' => 'Sorry! Unable To Add.');
@@ -158,9 +150,9 @@ class Banners extends Controller
             else
             {
                 $id = $this->request->getVar('id');
-                $this->banners_model->data['modified_date'] = date('Y-m-d H:i:s');
-                $this->banners_model->data['modified_by'] = session()->get('id');
-                $isUpdated = $this->banners_model->update_banner($id);
+                $this->product_category_model->data['modified_date'] = date('Y-m-d H:i:s');
+                $this->product_category_model->data['modified_by'] = session()->get('id');
+                $isUpdated = $this->product_category_model->update_product_category($id);
                 if ($isUpdated) 
                 {
                     $msg = array('type' => 'success', 'icon' => 'icon-ok green', 'txt' => 'Updated Successfully');
@@ -173,15 +165,16 @@ class Banners extends Controller
 
             }
 
-            return redirect()->to(base_url('/admin/banners'));
+            return redirect()->to(base_url('/admin/product-categories'));
 
 
 
             }
-                   
-
+        
     }
+
+
+
+
 }
-
-
 ?>

@@ -25,7 +25,7 @@ class Login extends Controller
     //For displaying login page
     public function index()
     {
-        if(!$this->session->get('user_id'))
+        if(!$this->session->get('id'))
         {
             echo view('Admin/Login/index');
         }
@@ -50,14 +50,12 @@ class Login extends Controller
 
             $sessionData = 
                 [
-                    'user_id' => $isLogin->user_id,
-                    'role_id'  => $isLogin->role_id,
+                    'id' => $isLogin->id,
                     'username' => $isLogin->username,
                     'first_name' => $isLogin->first_name,
                     'last_name' => $isLogin->last_name,
                     'email' => $isLogin->email,
-                    'status_ind' => $isLogin->status_ind,   
-                    'admin_user_menu_items'=> $isLogin->admin_menu_item_id,
+                    'status' => $isLogin->status,   
                 ];
             $this->session->set($sessionData);
             return redirect()->to(base_url('/admin/dashboard'));

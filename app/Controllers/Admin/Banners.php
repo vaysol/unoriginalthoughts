@@ -101,7 +101,7 @@ class Banners extends Controller
                     $image = $this->request->getFile('desktop_image');
                     $imageNameTrip = strrpos($_FILES['desktop_image']['name'], ".");
                     $imageName = substr($_FILES['desktop_image']['name'], 0, $imageNameTrip);
-                    $destnpath = 'assets/images/banner-images/'.$imageName;
+                    $destnpath = 'dynamic_images/banner-images/'.$imageName;
                     if($_FILES['desktop_image']['name'])
                     {
                         webp_image_with_transperent($destnpath,$image );
@@ -117,7 +117,7 @@ class Banners extends Controller
                     $image = $this->request->getFile('mobile_image');
                     $imageNameTrip = strrpos($_FILES['mobile_image']['name'], ".");
                     $imageName = substr($_FILES['mobile_image']['name'], 0, $imageNameTrip);
-                    $destnpath = 'assets/images/banner-images/'.$imageName;
+                    $destnpath = 'dynamic_images/banner-images/'.$imageName;
                     if($_FILES['mobile_image']['name'])
                     {
                         webp_image_with_transperent($destnpath,$image );

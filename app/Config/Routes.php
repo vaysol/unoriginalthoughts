@@ -47,6 +47,15 @@ $routes->get('/admin/banner/add', 'Admin\Banners::add');
 $routes->get('/admin/banner/edit/(:any)', 'Admin\Banners::edit/$1');
 $routes->post('/admin/banner/save', 'Admin\Banners::save');
 $routes->get('/admin/banner/delete/(:any)', 'Admin\Banners::delete/$1');
+
+//Product Category
+$routes->get('/admin/product-categories', 'Admin\ProductCategory::index');
+$routes->get('/admin/product-categories/add', 'Admin\ProductCategory::add');
+$routes->get('/admin/product-categories/edit/(:any)', 'Admin\ProductCategory::edit/$1');
+$routes->post('/admin/product-categories/save', 'Admin\ProductCategory::save');
+$routes->get('/admin/product-categories/delete/(:any)', 'Admin\ProductCategory::delete/$1');
+
+
 /*  Admin panel routes ends */
 
 $routes->get('/', 'Home::index');

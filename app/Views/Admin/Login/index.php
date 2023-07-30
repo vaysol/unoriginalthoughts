@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="<?php echo base_url('admin-assets/logo/logo.svg') ?>" type="image/x-icon">
+    <link rel="shortcut icon" href="<?php echo base_url('admin-assets/logo/favicon.png') ?>" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unoriginalthoughts</title>
     <!-- Bootstrap link -->
@@ -70,7 +70,7 @@
         <div class="admin-login_card">
             <div class="card-inner">
                 <div class="login-logo">
-                    <img src="<?php echo base_url('admin-assets/logo/favicon.png') ?>" alt="ami logo">
+                    <img src="<?php echo base_url('admin-assets/logo/Log.png') ?>" alt="Unoriginalthoughts logo">
                 </div>
                 <hr style="margin-bottom: 0;"> 
                 <form action="<?php echo base_url('/admin/login_check').'/' ?>" class="login-form"action="" method="POST" enctype="multipart/form-data">

@@ -17,9 +17,9 @@ class Dashboard extends Controller
 
     public function index()
     {
-        if(!$this->session->get('user_id'))
+        if(!$this->session->get('id'))
         {
-            echo view('Admin/Login/index');
+            return redirect()->to(base_url('/admin/login'));
         }
         else
         {

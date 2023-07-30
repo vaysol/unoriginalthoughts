@@ -21,7 +21,7 @@ class Banners extends Controller
     public function index()
     {
         
-        if (empty($this->session->get('user_id'))) {
+        if (empty($this->session->get('id'))) {
             return redirect()->to(base_url('/admin/login'));
         }
 
@@ -36,7 +36,7 @@ class Banners extends Controller
 
     public function add()
     {
-        if (empty($this->session->get('user_id'))) {
+        if (empty($this->session->get('id'))) {
             return redirect()->to(base_url('/admin/login'));
         }
 
@@ -48,7 +48,7 @@ class Banners extends Controller
 
     public function edit($id)
     {
-        if (empty($this->session->get('user_id'))) {
+        if (empty($this->session->get('id'))) {
             return redirect()->to(base_url('/admin/login'));
         }
         
@@ -61,12 +61,12 @@ class Banners extends Controller
     }
 
 
-    public function delete($banner_id)
+    public function delete($id)
     {
 
-        if (session()->get('user_id'))
+        if (session()->get('id'))
         {
-            $query = $this->banners_model->delete_banner($banner_id);
+            $query = $this->banners_model->delete_banner($id);
             if ($query) 
             {
                 $msg = array('type' => 'success', 'icon' => 'icon-ok green', 'txt' => 'Deleted Successfully');
@@ -91,61 +91,59 @@ class Banners extends Controller
             if ($this->request->getMethod() == 'post') 
             {
 
-                if (empty($this->session->get('user_id'))) 
+                if (empty($this->session->get('id'))) 
                 {
                     return redirect()->to(base_url('/admin/login'));
                 }
 
-                if ($this->request->getFile('desktop_banner')) 
+                if ($this->request->getFile('desktop_image')) 
                 {
-                    $image = $this->request->getFile('desktop_banner');
-                    $imageNameTrip = strrpos($_FILES['desktop_banner']['name'], ".");
-                    $imageName = substr($_FILES['desktop_banner']['name'], 0, $imageNameTrip);
+                    $image = $this->request->getFile('desktop_image');
+                    $imageNameTrip = strrpos($_FILES['desktop_image']['name'], ".");
+                    $imageName = substr($_FILES['desktop_image']['name'], 0, $imageNameTrip);
                     $destnpath = 'assets/images/banner-images/'.$imageName;
-                    if($_FILES['desktop_banner']['name'])
+                    if($_FILES['desktop_image']['name'])
                     {
                         webp_image_with_transperent($destnpath,$image );
                     }
-                    $this->banners_model->data['desktop_banner'] = $imageName != NULL ? $destnpath : '';
-                    if (!$this->banners_model->data['desktop_banner']) 
+                    $this->banners_model->data['desktop_image'] = $imageName != NULL ? $destnpath : '';
+                    if (!$this->banners_model->data['desktop_image']) 
                     {
-                        unset($this->banners_model->data['desktop_banner']);
+                        unset($this->banners_model->data['desktop_image']);
                     }
                 }
 
-                if ($this->request->getFile('mobile_banner')) {
-                    $image = $this->request->getFile('mobile_banner');
-                    $imageNameTrip = strrpos($_FILES['mobile_banner']['name'], ".");
-                    $imageName = substr($_FILES['mobile_banner']['name'], 0, $imageNameTrip);
+                if ($this->request->getFile('mobile_image')) {
+                    $image = $this->request->getFile('mobile_image');
+                    $imageNameTrip = strrpos($_FILES['mobile_image']['name'], ".");
+                    $imageName = substr($_FILES['mobile_image']['name'], 0, $imageNameTrip);
                     $destnpath = 'assets/images/banner-images/'.$imageName;
-                    if($_FILES['mobile_banner']['name'])
+                    if($_FILES['mobile_image']['name'])
                     {
                         webp_image_with_transperent($destnpath,$image );
                     }
-                    $this->banners_model->data['mobile_banner'] = $imageName != NULL ? $destnpath : '';
-                    if (!$this->banners_model->data['mobile_banner']) 
+                    $this->banners_model->data['mobile_image'] = $imageName != NULL ? $destnpath : '';
+                    if (!$this->banners_model->data['mobile_image']) 
                     {
-                        unset($this->banners_model->data['mobile_banner']);
+                        unset($this->banners_model->data['mobile_image']);
                     }
                 }
 
-                $this->banners_model->data['name'] = $this->request->getVar('name');
-                $this->banners_model->data['description'] = $this->request->getVar('description');
+                $this->banners_model->data['title'] = $this->request->getVar('title');
+                $this->banners_model->data['priority'] = $this->request->getVar('priority');
                 $this->banners_model->data['alt_text'] = $this->request->getVar('alt_text');
                 $this->banners_model->data['title_text'] = $this->request->getVar('title_text');
                 $this->banners_model->data['button_link'] = $this->request->getVar('button_link');
-                $this->banners_model->data['display_order'] = $this->request->getVar('display_order');
-                $this->banners_model->data['status_ind'] = $this->request->getVar('status_ind');
-                $this->banners_model->data['user_id'] = session()->get('user_id');
+                $this->banners_model->data['status'] = $this->request->getVar('status');
 
                  //Add
-            if (empty($this->request->getPost('banner_id'))) 
+            if (empty($this->request->getPost('id'))) 
             {
                 
-                $this->banners_model->data['created_date'] = date('Y-m-d H:i:s');
-                $this->banners_model->data['created_by'] = session()->get('user_id');
-                $this->banners_model->data['last_modified_date'] = date('Y-m-d H:i:s');
-                $this->banners_model->data['last_modified_by'] = session()->get('user_id');
+                $this->banners_model->data['create_date'] = date('Y-m-d H:i:s');
+                $this->banners_model->data['created_by'] = session()->get('id');
+                $this->banners_model->data['modified_date'] = date('Y-m-d H:i:s');
+                $this->banners_model->data['modified_by'] = session()->get('id');
 
                 $isInsert = $this->banners_model->insert_banner();
                 if ($isInsert) {
@@ -159,10 +157,10 @@ class Banners extends Controller
             //Edit
             else
             {
-                $banner_id = $this->request->getVar('banner_id');
-                $this->banners_model->data['last_modified_date'] = date('Y-m-d H:i:s');
-                $this->banners_model->data['last_modified_by'] = session()->get('user_id');
-                $isUpdated = $this->banners_model->update_banner($banner_id);
+                $id = $this->request->getVar('id');
+                $this->banners_model->data['modified_date'] = date('Y-m-d H:i:s');
+                $this->banners_model->data['modified_by'] = session()->get('id');
+                $isUpdated = $this->banners_model->update_banner($id);
                 if ($isUpdated) 
                 {
                     $msg = array('type' => 'success', 'icon' => 'icon-ok green', 'txt' => 'Updated Successfully');

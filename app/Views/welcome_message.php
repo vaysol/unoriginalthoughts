@@ -15,7 +15,7 @@
         }
         *:focus {
             background-color: rgba(221, 72, 20, .2);
-            outline: none;
+            outline: none;f
         }
         html, body {
             color: rgba(33, 37, 41, 1);

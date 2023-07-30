@@ -19,7 +19,7 @@ class Admin extends Controller
     }
     public function index()
     {
-        if (empty($this->session->get('user_id'))) {
+        if (empty($this->session->get('id'))) {
             return redirect()->to(base_url('/admin/login'));
         } else {
             return redirect()->to(base_url('/admin/dashboard'));

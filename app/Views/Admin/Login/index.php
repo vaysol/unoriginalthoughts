@@ -70,7 +70,7 @@
         <div class="admin-login_card">
             <div class="card-inner">
                 <div class="login-logo">
-                    <img src="<?php echo base_url('admin-assets/logo/Log.png') ?>" alt="Unoriginalthoughts logo">
+                    <img src="<?php echo base_url('admin-assets/logo/Logo.png') ?>" alt="Unoriginalthoughts logo" width="100">
                 </div>
                 <hr style="margin-bottom: 0;"> 
                 <form action="<?php echo base_url('/admin/login_check').'/' ?>" class="login-form"action="" method="POST" enctype="multipart/form-data">

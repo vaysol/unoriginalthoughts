@@ -27,7 +27,7 @@
         <h2 class="heading"><span>Best Sellers</span></h2>
     </div>
 
-    <div class="swiper featured-slider">
+    <div class="swiper featured-slider container">
         <div class="swiper-wrapper">
 
             <!-- Placeholder for best seller products -->
@@ -98,7 +98,7 @@
         <h2 class="heading"><span>Portfolio</span></h2>
     </div>
 
-    <div class="swiper mySwiper">
+    <div class="swiper mySwiper container">
         <div class="swiper-wrapper">
 
             <!-- Placeholder for portfolio images -->

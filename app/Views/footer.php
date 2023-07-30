@@ -22,17 +22,14 @@
                <div class="icons align-left">
                    <p> <a href="mailto:hello@unoriginalthoughts.com">
                            <i class="fa-brands fa-solid fa-envelope"></i>
-                           hello@unoriginalthoughts.com
                        </a>
                    </p>
                    <p> <a href="https://instagram.com/unoriginal__thoughts">
                            <i class="fa-brands fa-instagram"></i>
-                           @unoriginal__thoughts
                        </a>
                    </p>
                    <p> <a href="https://www.pinterest.com/unoriginal__thoughts">
                            <i class="fa-brands fa-pinterest"></i>
-                           @unoriginal__thoughts
                        </a>
                    </p>
                </div>

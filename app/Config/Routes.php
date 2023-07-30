@@ -74,6 +74,12 @@ $routes->get('/admin/product/delete/(:any)', 'Admin\Products::delete/$1');
 /*  Admin panel routes ends */
 
 $routes->get('/', 'Home::index');
+$routes->get('/about', 'Home::about');
+$routes->get('/services', 'Home::services');
+$routes->get('/team', 'Home::team');
+$routes->get('/contact-us', 'Home::contact_us');
+
+
 
 /*
  * --------------------------------------------------------------------

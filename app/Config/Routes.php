@@ -29,6 +29,50 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
+/*  Admin panel routes starts */
+
+$routes->get('/admin', 'Admin\Admin::index');
+$routes->get('/admin/login', 'Admin\Login::index');
+$routes->post('/admin/login_check', 'Admin\Login::login_check');
+$routes->get('/admin/logout', 'Admin\Login::logout');
+
+//Dashboard
+$routes->get('/admin/dashboard', 'Admin\Dashboard::index');
+
+
+//Banner
+$routes->get('/admin/banners', 'Admin\Banners::index');
+$routes->get('/admin/banner/add', 'Admin\Banners::add');
+$routes->get('/admin/banner/edit/(:any)', 'Admin\Banners::edit/$1');
+$routes->post('/admin/banner/save', 'Admin\Banners::save');
+$routes->get('/admin/banner/delete/(:any)', 'Admin\Banners::delete/$1');
+
+//Product Category
+$routes->get('/admin/product-categories', 'Admin\ProductCategory::index');
+$routes->get('/admin/product-categories/add', 'Admin\ProductCategory::add');
+$routes->get('/admin/product-categories/edit/(:any)', 'Admin\ProductCategory::edit/$1');
+$routes->post('/admin/product-categories/save', 'Admin\ProductCategory::save');
+$routes->get('/admin/product-categories/delete/(:any)', 'Admin\ProductCategory::delete/$1');
+
+//Product Category
+$routes->get('/admin/portfolios', 'Admin\Portfolio::index');
+$routes->get('/admin/portfolio/add', 'Admin\Portfolio::add');
+$routes->get('/admin/portfolio/edit/(:any)', 'Admin\Portfolio::edit/$1');
+$routes->post('/admin/portfolio/save', 'Admin\Portfolio::save');
+$routes->get('/admin/portfolio/delete/(:any)', 'Admin\Portfolio::delete/$1');
+
+// Enquiry
+$routes->get('/admin/enquiry', 'Admin\Enquiry::index');
+
+//Product Category
+$routes->get('/admin/products', 'Admin\Products::index');
+$routes->get('/admin/product/add', 'Admin\Products::add');
+$routes->get('/admin/product/edit/(:any)', 'Admin\Products::edit/$1');
+$routes->post('/admin/product/save', 'Admin\Products::save');
+$routes->get('/admin/product/delete/(:any)', 'Admin\Products::delete/$1');
+/*  Admin panel routes ends */
+
 $routes->get('/', 'Home::index');
 $routes->get('/about', 'Home::about');
 $routes->get('/portfolio', 'Home::portfolio');

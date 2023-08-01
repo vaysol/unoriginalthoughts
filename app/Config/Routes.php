@@ -79,6 +79,9 @@ $routes->get('/admin/portfolio-item/edit/(:any)', 'Admin\PortfolioItem::edit/$1'
 $routes->post('/admin/portfolio-item/save', 'Admin\PortfolioItem::save');
 $routes->get('/admin/portfolio-item/delete/(:any)', 'Admin\PortfolioItem::delete/$1');
 
+// Users
+$routes->get('/admin/users', 'Admin\User::index');
+
 
 /*  Admin panel routes ends */
 

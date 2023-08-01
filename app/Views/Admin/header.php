@@ -82,6 +82,10 @@
                         <span class="nav_name">Enquiry</span>
                     </a>
 
+                    <a href="<?php echo base_url('/admin/users') . '/' ?>" class="nav_link">
+                        <em class='fa fa-bars'></em>
+                        <span class="nav_name">Users</span>
+                    </a>
 
                     <a href="<?php echo base_url('/admin/logout') . '/' ?>" onclick="return confirm('Are you sure! You want to logout?')" class="blogs nav_link">
                         <em class='fa fa-sign-out'></em> <span class="nav_name">Logout</span>

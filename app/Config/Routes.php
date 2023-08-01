@@ -71,6 +71,15 @@ $routes->get('/admin/product/add', 'Admin\Products::add');
 $routes->get('/admin/product/edit/(:any)', 'Admin\Products::edit/$1');
 $routes->post('/admin/product/save', 'Admin\Products::save');
 $routes->get('/admin/product/delete/(:any)', 'Admin\Products::delete/$1');
+
+//PortfolioItem
+$routes->get('/admin/portfolio-items', 'Admin\PortfolioItem::index');
+$routes->get('/admin/portfolio-item/add', 'Admin\PortfolioItem::add');
+$routes->get('/admin/portfolio-item/edit/(:any)', 'Admin\PortfolioItem::edit/$1');
+$routes->post('/admin/portfolio-item/save', 'Admin\PortfolioItem::save');
+$routes->get('/admin/portfolio-item/delete/(:any)', 'Admin\PortfolioItem::delete/$1');
+
+
 /*  Admin panel routes ends */
 
 $routes->get('/', 'Home::index');

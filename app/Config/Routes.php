@@ -82,6 +82,9 @@ $routes->get('/admin/portfolio-item/delete/(:any)', 'Admin\PortfolioItem::delete
 // Users
 $routes->get('/admin/users', 'Admin\User::index');
 
+// Orders
+$routes->get('/admin/orders', 'Admin\Orders::index');
+
 
 /*  Admin panel routes ends */
 
